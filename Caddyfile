@@ -1,0 +1,21 @@
+{
+	cache {
+		redis {
+			configuration {
+				ClientName souin-redis
+				SelectDB 0
+				InitAddress redis-instance:6379
+			}
+		}
+
+		key {
+			template {http.request.scheme}-{http.request.hostport}-{http.request.uri}
+		}
+	}
+}
+
+http://localhost:8080 {
+	cache
+
+	reverse_proxy nginx:80
+}

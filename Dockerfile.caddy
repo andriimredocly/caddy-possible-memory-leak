@@ -1,0 +1,15 @@
+FROM --platform=linux/amd64 caddy:2.9-builder-alpine AS builder
+
+RUN xcaddy build \
+  --with github.com/caddyserver/cache-handler \
+  --with github.com/darkweak/storages/redis/caddy
+
+FROM --platform=linux/amd64 caddy:2.9-alpine
+
+COPY --from=builder /usr/bin/caddy /usr/bin/caddy
+
+WORKDIR /usr/src/app
+
+COPY ./Caddyfile .
+
+CMD ["caddy", "run", "--config", "/usr/src/app/Caddyfile"]
