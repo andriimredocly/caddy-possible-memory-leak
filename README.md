@@ -2,5 +2,11 @@
 
 ## Steps to reproduce
 
-1. `docker-compose up -d --build`
-1. `bash wrk.sh`
+1. Install `wrk` - https://github.com/wg/wrk
+
+For MacOS - `brew install wrk`
+
+2. `docker-compose up -d --build`
+
+
+3. `bash wrk.sh`
